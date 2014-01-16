@@ -1,64 +1,58 @@
 'use strict';
 angular.module('hoodie').service('hoodieArray', ['$rootScope', 'hoodieStore', 'hoodie',
-function($rootScope, hoodieStore, hoodie) {
+  function ($rootScope, hoodieStore, hoodie) {
 
-  this.bind = function ($scope, key, hoodieKey) {
+    this.bind = function ($scope, key, hoodieKey) {
 
-    hoodieKey = hoodieKey || key;
-    $scope[key] = $scope[key] || [];
+      hoodieKey = hoodieKey || key;
+      $scope[key] = $scope[key] || [];
 
-    hoodieStore.findAll(hoodieKey)
-      .then(function (data) {
-        $scope[key] = data;
-      });
-
-    $scope.$watch(key, function (newValue, oldValue) {
-      if (newValue === oldValue || !angular.isArray(newValue) || !angular.isArray(oldValue)) {
-        // Init
-      } else {
-
-        var delta = getDelta(oldValue, newValue, isEqual);
-        var item;
-        var key;
-
-        // first, add new items
-        for (key in delta.added) {
-          item = delta.added[key];
-          hoodieStore.add(hoodieKey, item);
-        }
-
-        // then, the changed items
-        for (key in delta.changed) {
-          item = delta.changed[key];
-          hoodieStore.update(hoodieKey, item.id, item);
-        }
-
-        // Last, lets delete items
-        for (key in delta.deleted) {
-          item = delta.deleted[key];
-          hoodieStore.remove(hoodieKey, item.id);
-        }
-
-      }
-    }, true);
-
-    hoodie.store.on('change:' + hoodieKey, function (event, changedObject) {
       hoodieStore.findAll(hoodieKey)
-      .then(function (data) {
-        $scope[key] = data;
+        .then(function (data) {
+          $scope[key] = data;
+        });
+
+      $scope.$watch(key, function (newValue, oldValue) {
+        if (newValue === oldValue || !angular.isArray(newValue) || !angular.isArray(oldValue)) {
+          // Init
+        } else {
+
+          var delta = getDelta(oldValue, newValue, isEqual);
+          var item;
+          var key;
+
+          // first, add new items
+          for (key in delta.added) {
+            item = delta.added[key];
+            hoodieStore.add(hoodieKey, item);
+          }
+
+          // then, the changed items
+          for (key in delta.changed) {
+            item = delta.changed[key];
+            hoodieStore.update(hoodieKey, item.id, item);
+          }
+
+          // Last, lets delete items
+          for (key in delta.deleted) {
+            item = delta.deleted[key];
+            hoodieStore.remove(hoodieKey, item.id);
+          }
+
+        }
+      }, true);
+
+      hoodie.store.on('change:' + hoodieKey, function (//event, changedObject
+        ) {
+        hoodieStore.findAll(hoodieKey)
+          .then(function (data) {
+            $scope[key] = data;
+          });
       });
-    });
 
 
-  };
-}]);
-
-function arrayObjectIndexOf(myArray, searchTerm, property) {
-  for (var i = 0, len = myArray.length; i < len; i++) {
-    if (myArray[i][property] === searchTerm) return i;
-  }
-  return -1;
-}
+    };
+  }]);
 
 /**
  * Creates a map out of an array be choosing what property to key by
