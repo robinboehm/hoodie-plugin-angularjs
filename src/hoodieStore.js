@@ -13,7 +13,9 @@ angular.module('hoodie').service('hoodieStore', ['$rootScope', '$q', 'hoodie',
       'remove',
       'removeAll'
     ], function (fnName) {
-      service[fnName] = $q.when(fnName(hoodie.store));
+      service[fnName] = function () {
+        return $q.when(hoodie.store[fnName](arguments));
+      };
     });
 
     service.findAll()

@@ -14,7 +14,9 @@ angular.module('hoodie').service('hoodieAccount', ['$rootScope', 'hoodie', '$q',
       'resetPassword',
       'destroy'
     ], function (fnName) {
-      service[fnName] = $q.when(fnName(hoodie.account));
+      service[fnName] = function () {
+        return $q.when(hoodie.store[fnName](arguments));
+      };
     });
 
     // listen for account events
