@@ -1,2 +1,2 @@
-// Error in ngMock with constants and Error solved by >1.2.9 https://github.com/angular/angular.js/commit/7e916455b36dc9ca4d4afc1e44cade90006d00e3
+'use strict';
 angular.module('hoodie').constant('HOODIE_ERROR_URL', 'No url for hoodie set! Please set the hoodie url using hoodieProvider. Example: \n  myApp.config(function(hoodieProvider) {\n    hoodieProvider.url(\'http://myapp.dev/_api\'); });  \n  });')

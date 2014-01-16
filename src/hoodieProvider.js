@@ -1,3 +1,4 @@
+'use strict';
 angular.module('hoodie').provider('hoodie', ['HOODIE_ERROR_URL', function (HOODIE_ERROR_URL) {
   var hoodieUrl;
   this.url = function (url) {

@@ -1,3 +1,4 @@
+'use strict';
 angular.module('hoodie').service('hoodieArray', ['$rootScope', 'hoodieStore', 'hoodie',
 function($rootScope, hoodieStore, hoodie) {
 
