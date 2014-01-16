@@ -1,4 +1,4 @@
-hoodieModule.service('hoodieArray', ['$rootScope', 'hoodieStore', 'hoodie',
+angular.module('hoodie').service('hoodieArray', ['$rootScope', 'hoodieStore', 'hoodie',
 function($rootScope, hoodieStore, hoodie) {
 
   this.bind = function ($scope, key, hoodieKey) {

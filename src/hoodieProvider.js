@@ -1,4 +1,4 @@
-hoodieModule.provider('hoodie', ['HOODIE_ERROR_URL', function (HOODIE_ERROR_URL) {
+angular.module('hoodie').provider('hoodie', ['HOODIE_ERROR_URL', function (HOODIE_ERROR_URL) {
   var hoodieUrl;
   this.url = function (url) {
     if (arguments.length) {

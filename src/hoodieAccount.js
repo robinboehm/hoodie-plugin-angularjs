@@ -1,5 +1,5 @@
 
-hoodieModule.service('hoodieAccount', ['$rootScope', 'hoodie', '$q',
+angular.module('hoodie').service('hoodieAccount', ['$rootScope', 'hoodie', '$q',
 function($rootScope, hoodie, $q) {
   var service = this;
 
