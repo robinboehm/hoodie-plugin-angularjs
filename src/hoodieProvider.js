@@ -1,16 +1,15 @@
-var HOODIE_URL_ERROR = "No url for hoodie set! Please set the hoodie url using hoodieProvider. Example: \n  myApp.config(function(hoodieProvider) {\n    hoodieProvider.url('http://myapp.dev/_api'); });  \n  });";
-hoodieModule.provider('hoodie', [function() {
+hoodieModule.provider('hoodie', ['HOODIE_ERROR_URL', function (HOODIE_ERROR_URL) {
   var hoodieUrl;
-  this.url = function(url) {
+  this.url = function (url) {
     if (arguments.length) {
       hoodieUrl = url;
     }
     return url;
   };
 
-  this.$get = function() {
+  this.$get = function () {
     if (!hoodieUrl) {
-      throw new Error(HOODIE_URL_ERROR);
+      throw new Error(HOODIE_ERROR_URL);
     }
     return new Hoodie(hoodieUrl);
   };
